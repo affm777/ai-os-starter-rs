@@ -2,7 +2,6 @@
   "permissions": {
     "allow": [
       "Read(~/Documents/Second-Brain/**)",
-      "Glob(~/Documents/Second-Brain/**)",
       "Grep(~/Documents/Second-Brain/**)",
       "Bash(ls ~/Documents/Second-Brain/**)",
       "Bash(find ~/Documents/Second-Brain/**)",
@@ -94,7 +93,6 @@
     "command": "bash \"$HOME/.claude/hooks/noderun.sh\" \"$HOME/.claude/hooks/gsd-statusline.js\""
   },
   "env": {
-    "DISABLE_TELEMETRY": "1",
     "DISABLE_ERROR_REPORTING": "1",
     "DISABLE_FEEDBACK_COMMAND": "1",
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1"

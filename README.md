@@ -180,6 +180,7 @@ Siehe [docs/troubleshooting.md](docs/troubleshooting.md) für:
 - Backup-Files wiederherstellen
 - Vault unter anderem Pfad
 - Hooks nicht aktiv
+- `/remote-control` startet nicht (DISABLE_TELEMETRY)
 
 ---
 
