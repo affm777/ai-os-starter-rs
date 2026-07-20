@@ -29,14 +29,18 @@ Holt neue Meetings aus Fathom, schreibt sie als strukturierte Notiz in deinen Po
 
 **Voraussetzung:** Fathom als Connector verbunden, siehe [connector-setup.md](connector-setup.md).
 
+**Name**
 ```
-Name
 fathom-sync
+```
 
-Description
+**Description**
+```
 Täglicher autonomer Fathom-Sync: neue Meetings aus Fathom MCP nach Obsidian-Vault 01_Inbox/, mit Personen-Cross-Linking und Projekt-Matching.
+```
 
-Instructions
+**Instructions**
+```
 /brain:sync-meetings scheduled
 ```
 
@@ -48,14 +52,18 @@ Instructions
 
 Nimmt alles, was sich in `01_Inbox/` angesammelt hat, und legt es an den richtigen Ort: zum Projekt, zur Area, zu den Resources oder den Kontakten. Aktualisiert dabei den Index und die Timeline.
 
+**Name**
 ```
-Name
 inbox-sort
+```
 
-Description
+**Description**
+```
 Täglicher autonomer Inbox-Sweep im Second Brain.
+```
 
-Instructions
+**Instructions**
+```
 /brain:sort-inbox scheduled
 ```
 
@@ -67,14 +75,18 @@ Instructions
 
 Prüft den ganzen Vault auf Index-Drift, kaputte Wikilinks, fehlende Cross-Referenzen, verwaiste Dateien und veraltete Decisions. Schreibt einen Bericht, ändert aber nichts von selbst.
 
+**Name**
 ```
-Name
 vault-health
+```
 
-Description
+**Description**
+```
 Wöchentlicher Vault-Health-Check: prüft Index-Drift, kaputte Wikilinks, fehlende Cross-Referenzen, verwaiste Dateien und veraltete Decisions.
+```
 
-Instructions
+**Instructions**
+```
 /brain:health-check scheduled
 ```
 
@@ -89,11 +101,14 @@ Der Report landet unter `00_Meta/system/lint-reports/`. Bewusst nur Befund, kein
 1. Claude Desktop App öffnen
 2. In der Seitenleiste auf **Routines**
 3. **New routine** → **Local** wählen
-4. **Name** und **Description** aus dem Block oben kopieren
-5. Bei **Instructions** den Slash-Command einsetzen
-6. **Working folder** setzen, falls die Routine ein bestimmtes Projekt braucht
-7. **Schedule** wählen
-8. Speichern, dann **„Aktiv halten"** in der Übersicht einschalten
+4. **Name** kopieren und einsetzen
+5. **Description** kopieren und einsetzen
+6. **Instructions** kopieren und einsetzen
+7. **Working folder** setzen, falls die Routine ein bestimmtes Projekt braucht
+8. **Schedule** wählen
+9. Speichern, dann **„Aktiv halten"** in der Übersicht einschalten
+
+Jedes Feld hat oben einen eigenen Kopier-Block. Du kopierst also dreimal einzeln, statt einen Sammelblock auseinanderzupflücken.
 
 Beim ersten Lauf fragt Claude nach Berechtigungen. Bestätige sie einmal dauerhaft, sonst bleibt die Routine beim nächsten unbeaufsichtigten Lauf hängen.
 
