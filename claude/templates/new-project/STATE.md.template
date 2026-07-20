@@ -1,0 +1,32 @@
+# Project State
+
+## Project Reference
+
+**Projekt:** {{PROJEKTNAME}}
+**Beschreibung:** {{KURZBESCHREIBUNG}}
+**Typ:** {{TYP}}
+
+## Current Position
+
+Status: Frisch aufgesetzt, noch kein Kickoff
+Last activity: {{HEUTE}} — Initial-Setup via /new-project
+
+## Accumulated Context
+
+### Decisions
+
+(Noch keine)
+
+### Pending Todos
+
+- [ ] Kickoff planen
+
+### Blockers/Concerns
+
+(Keine)
+
+## Session Continuity
+
+Last session: {{HEUTE}}
+Stopped at: Setup abgeschlossen
+Next step: Kickoff
