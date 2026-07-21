@@ -54,7 +54,27 @@ Bestätige mir, welche Dateien und Ordner angekommen sind.
 
 Danach `/exit` und `claude` neu starten, damit der Skill geladen wird.
 
-## Schritt 3 — Erste Iteration bauen
+## Schritt 3 — Leitplanken in deine Projekt-CLAUDE.md
+
+Die Rechenregeln kennt der Skill selbst. Was er nicht abdeckt, sind die paar Punkte, die auch dann gelten sollen, wenn du ohne ihn im Ordner arbeitest (etwa `kosten.md` von Hand aufmachst). Die gehören in die CLAUDE.md deines Projekts, die aus Schritt 1 schon existiert. Sag Claude:
+
+```
+Ergänze die CLAUDE.md dieses Projekts um einen Abschnitt "Kosten-Tracking"
+mit diesen Punkten. Bestehende Inhalte nicht umschreiben, nur anhängen:
+
+- kosten/kosten.md ist die Single Source of Truth. auswertung.xlsx und
+  dashboard.html sind nur Ansichten, werden bei jedem Lauf neu erzeugt und
+  nie zurückgelesen. Wer dort etwas ändert, verliert es beim nächsten Lauf.
+- Jede Zahl im Ordner kosten/ führt auf eine Quelldatei oder eine benannte
+  Annahme zurück. Nie still rechnen, nie eine fehlende Zahl schätzen.
+- Der Ordner kosten/ gehört in Git. Jede Iteration wird committet, damit die
+  Historie steht.
+- Sprache Deutsch, echte Umlaute.
+- Keine Lohndaten und keine Klarnamen in kosten/, nur aggregierte
+  Finanzdaten.
+```
+
+## Schritt 4 — Erste Iteration bauen
 
 Leg deinen Bank-Export nach `kosten/exporte/bank/_neu/` (oder Belege nach `kosten/belege/_neu/`). Dann sag Claude:
 
@@ -70,7 +90,7 @@ Der Skill `cost-tracker` läuft an:
 5. rendert `auswertung.xlsx` (vier Tabs: `00_Cockpit`, `01_Monate`, `02_Standorte`, `03_Buchungen` als Drill-down) und `dashboard.html` (offline-Browser-Ansicht),
 6. schreibt den Diff ins `CHANGELOG.md` und verschiebt verarbeitete Dateien nach `analysiert/`.
 
-## Schritt 4 — Prüfen und Version sichern
+## Schritt 5 — Prüfen und Version sichern
 
 Eine Frage an dich selbst: **Führt jede Zahl auf eine Quelle oder eine Annahme zurück?** Wenn ja, sag Claude:
 
@@ -127,7 +147,6 @@ Mehr braucht es nicht. Der Skill nimmt, was da ist, und meldet transparent, welc
 cost-tracker/
 ├── README.md                          ← das hier
 ├── vorlage/                           ← das Gerüst, zieht als kosten/ ins Projekt
-│   ├── CLAUDE.md                      ← Regeln: rechne nie still, nenne die Quelle
 │   ├── SOURCES.md                     ← Quellen-Manifest: Kanäle, Schemas, Transfer-Regeln
 │   ├── KOSTEN-KATEGORIEN.md           ← gültige Kostenblöcke (Vorschlag, frei anpassbar)
 │   ├── STANDORTE.md                   ← Standorte + Zuordnungs-Regeln (zweite Dimension)

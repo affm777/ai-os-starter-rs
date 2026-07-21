@@ -14,13 +14,12 @@ Dieses Tool beantwortet eine Frage: **wohin geht mein Geld?** Je Kostenblock, je
 
 Jeder Posten bekommt **zwei Zuordnungen**: einen Kostenblock aus `KOSTEN-KATEGORIEN.md` und einen Standort aus `STANDORTE.md` (inklusive `uebergreifend` für zentrale Kosten). Beides sind editierbare Dateien, kein Code.
 
-Das Leitprinzip steht in `kosten/CLAUDE.md` und gilt absolut: **die Wahrheit ist Text (`kosten.md`), Excel und Dashboard sind nur Ansichten** und werden nie zurückgelesen. Jede Zahl führt auf eine Quelle oder eine benannte Annahme zurück. Du rechnest nie still, du rätst nie eine Zuordnung, du erfindest keine fehlende Zahl. Kannst du einen Posten nicht zuordnen, fragst du den User, statt zu raten.
+Das Leitprinzip gilt absolut: **die Wahrheit ist Text (`kosten.md`), Excel und Dashboard sind nur Ansichten** und werden nie zurückgelesen. Jede Zahl führt auf eine Quelle oder eine benannte Annahme zurück. Du rechnest nie still, du rätst nie eine Zuordnung, du erfindest keine fehlende Zahl. Kannst du einen Posten nicht zuordnen, fragst du den User, statt zu raten.
 
 ## 0. Orientierung (immer zuerst)
 
 1. Finde das Arbeitsverzeichnis: den Ordner `kosten/` im aktuellen Projekt (er entstand aus `vorlage/`). Alle Pfade unten sind relativ dazu.
 2. Lies in dieser Reihenfolge, ohne sie zu duplizieren:
-   - `CLAUDE.md`: die Regeln beim Rechnen (PFLICHT).
    - `ANNAHMEN.md`: Konfiguration (Währung), **Fixkosten-Tabelle**, **Erwartete Kosten**, Geklärte Beobachtungen, aktive Annahmen.
    - `SOURCES.md`: welche Quelle `aktiv` ist, die Schemas, die Transfer-Regeln.
    - `KOSTEN-KATEGORIEN.md`: die gültigen Kostenblöcke und Zuordnungs-Regeln.
@@ -212,7 +211,7 @@ Inhalt:
 
 Zahlungsanbieter-Gebühren live per Connector (nur die Gebühren-Seite), CAMT.053-XML, Budget-Ziele je Block, Kostenstellen-Sync mit der Buchhaltung. Die getrennte Text-Wahrheit macht das möglich, ohne den Bestand umzubauen. Liquiditätsplanung ist KEIN Ausbau dieses Tools, sondern ein eigener Use Case.
 
-## Eiserne Regeln (aus CLAUDE.md, hier nochmal)
+## Eiserne Regeln
 
 - Rechne nie still: jede Zahl mit Herkunft (Quelldatei oder benannte Annahme).
 - **Nur Ist.** Keine Prognose, keine Fortschreibung, keine geschätzte Zahl. Fehlt etwas, ist es eine offene Frage.
