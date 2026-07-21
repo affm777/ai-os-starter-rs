@@ -43,7 +43,11 @@ Lies `.claude/rules/github-board.md` einmal pro Lauf für Projekt- und Feld-IDs,
 
    **Umgesetzt und geprüft sind zwei verschiedene Dinge.** Maßstab für den Statuswechsel ist die *Umsetzung*: ist jedes Akzeptanzkriterium im Code abgebildet, geht das Issue in den Review. Fehlende automatisierte Tests oder eine Prüfung, die nur von Hand möglich war, halten es **nicht** auf. Sie gehören in den Kommentar unter „wie zu prüfen". Sonst bleiben Tickets in Projekten ohne Testabdeckung für immer liegen. Offen heißt hier: ein Kriterium ist gar nicht oder nur teilweise gebaut.
 
-7. **Zurückmelden:** Link zum PR und zum Issue, der Statuswechsel, und was als Nächstes passiert: der Anforderer prüft, sein Feedback kommt über `/issue-feedback` als Kommentar zurück und holt das Issue wieder auf den Arbeits-Status.
+7. **Zurückmelden:** Link zum PR und zum Issue, der Statuswechsel, und was als Nächstes passiert:
+   - Der Anforderer prüft. **Nimmt er ab**, setzt er auf `Ready for Deployment`, und der Pull Request wird von der Entwicklung gemergt und ausgeliefert (Status springt dann automatisch auf `Done`).
+   - **Hakt etwas**, kommt sein Feedback über `/issue-feedback` als Kommentar zurück und holt das Issue wieder auf den Arbeits-Status.
+
+   **Den Pull Request hier nicht selbst mergen.** Er bleibt bis zur Abnahme offen. Fehlt `Ready for Deployment` im Board, ist es der Status, den das Team direkt nach der Abnahme merged, dann entfällt dieser Zwischenschritt.
 
 ## Regeln
 

@@ -49,14 +49,21 @@ Deshalb ist diese Anleitung dreigeteilt: **Teil A** richtet einmal alles ein und
                                                       ▼
  4 du testest ◀────── ÜBERGABE ──────────────  [In Review]
          │
-         ├── passt:  Pull Request mergen  ──▶  [Done]   (setzt GitHub selbst)
+         ├── passt:  Status auf
+         │           [Ready for Deployment]
+         │                    └─ ÜBERGABE ──▶  5 Pull Request mergen,
+         │                                       ausliefern
+         │                                              │
+         │                                              ▼
+         │                                          [Done]
+         │                                     (setzt GitHub beim Merge selbst)
          │
          └── hakt:   /issue-feedback
                           │
                           └─ ÜBERGABE ─────▶  [In Progress]  weiter bei 2
 ```
 
-Drei Übergaben, und der Kreis schließt sich: Was der Product Owner nicht abnimmt, landet als Kommentar wieder bei der Entwicklung, ohne dass jemand den Stand von Hand nachpflegt.
+Vier Übergaben, und der Kreis schließt sich. Der Product Owner **merged nicht selbst**: er nimmt ab, indem er auf `Ready for Deployment` stellt, und die Entwicklung liefert aus. Was er nicht abnimmt, landet als Kommentar wieder bei der Entwicklung, ohne dass jemand den Stand von Hand nachpflegt.
 
 ## Konventionen in dieser Anleitung
 
@@ -171,7 +178,7 @@ Der Schritt, den kein Skill übernimmt, weil er eine Entscheidung ist und keine 
 
 Steht ein Ticket auf **`In Review`**, ist die Entwicklung fertig und du bist dran. Im Kommentar von `/issue-done` steht je Akzeptanzkriterium, was erfüllt ist und wie du es prüfst.
 
-**Passt es:** Pull Request mergen. Das Issue schließt sich von selbst und rutscht auf `Done`.
+**Passt es:** Status im Board auf **`Ready for Deployment`** setzen. Das ist deine Abnahme, ein Handgriff, kein Skill. **Den Pull Request mergst du nicht selbst** — das Ausliefern gehört der Entwicklung, die weiß, wann und wohin. `Ready for Deployment` ist genau das Signal dafür.
 
 **Hakt etwas:**
 
@@ -187,7 +194,7 @@ Ich habe #<Nummer> getestet, folgendes Feedback: <deine Beobachtung>
 
 # Teil C — Der Weg der Entwicklung
 
-Zwei Skills: einer holt das Ticket in den Code, einer bringt es zur Abnahme.
+Zwei Skills, die das Ticket in den Code und zurück zur Abnahme bringen, plus das Ausliefern am Schluss.
 
 ## C1 — Ticket umsetzen
 
@@ -215,9 +222,21 @@ Fertig, meld das Issue ab.
 
 `/issue-done` zieht Bilanz gegen die Akzeptanzkriterien, öffnet den Pull Request mit `Closes #<Nummer>` und schreibt den Prüf-Kommentar ans Issue. Das Ticket geht auf `In Review`, der Product Owner ist dran.
 
+**Der Pull Request bleibt hier offen.** Er wird erst nach der Abnahme gemergt, siehe C3.
+
 **`Closes #<Nummer>` ist der Kern des Ablaufs.** Beim Merge schließt sich das Issue automatisch und rutscht auf `Done`. Fehlt die Zeile, reißt der automatische Teil der Kette, und niemand merkt es, bis sich erledigte Tickets stapeln.
 
 **Der Prüf-Kommentar entscheidet über die Abnahme.** Er muss jemanden in die Lage versetzen, das Ergebnis zu testen, ohne den Code zu lesen. „Ist umgesetzt" ist kein Kommentar.
+
+## C3 — Ausliefern
+
+Steht ein Ticket auf **`Ready for Deployment`**, hat der Product Owner abgenommen. Jetzt bist du wieder dran: Pull Request mergen und ausliefern.
+
+Beim Merge schließt sich das Issue durch `Closes #<Nummer>` von selbst, und die Board-Automatik zieht es auf **`Done`**. Du musst den Status nicht von Hand setzen.
+
+> **Warum der Product Owner nicht selbst merged:** Wann und wohin ausgeliefert wird, hängt an Dingen, die er nicht überblickt (offene Branches, Release-Fenster, Abhängigkeiten). Er sagt mit `Ready for Deployment`, dass es fachlich passt. Den Rest entscheidest du.
+
+**Ist `Ready for Deployment` bei euch ohne Bedeutung**, weil ihr fortlaufend ausliefert und direkt nach der Abnahme mergt, dann streicht den Status beim Setup und arbeitet mit sechs. Ein Status, den niemand pflegt, ist schlimmer als einer, den es nicht gibt.
 
 ---
 

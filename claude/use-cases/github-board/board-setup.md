@@ -92,7 +92,7 @@ Diese sieben Optionen herstellen, in dieser Reihenfolge:
 | `Ready` | Akzeptanzkriterien stehen, Size gesetzt, Sprint zugewiesen. Ziehbar. |
 | `In Progress` | Branch steht, es wird gearbeitet. |
 | `In Review` | PR offen, wartet auf CI und Review. |
-| `Ready for Deployment` | Gemergt, aber noch nicht ausgeliefert. |
+| `Ready for Deployment` | Vom Product Owner fachlich abgenommen, wartet auf Merge und Auslieferung. |
 | `Done` | Ausgeliefert. |
 | `Rejected` | Getriaged und verworfen (Duplikat, außerhalb des Scopes, überholt). |
 

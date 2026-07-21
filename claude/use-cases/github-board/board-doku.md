@@ -22,7 +22,9 @@ flowchart LR
     B -->|Grooming:<br/>Kriterien, Size, Sprint| C(Ready)
     C -->|Arbeit beginnt,<br/>Branch steht| D(In Progress)
     D -->|PR offen,<br/>Closes #nr| E(In Review)
-    E -->|PR gemergt| F([Done])
+    E -->|PO nimmt ab| H(Ready for Deployment)
+    H -->|Dev mergt und liefert aus| F([Done])
+    E -.->|Feedback| D
     B -.->|verworfen| G([Rejected])
     C -.->|zurückgestellt| B
 ```
@@ -35,13 +37,17 @@ flowchart LR
 | **Ready** | Akzeptanzkriterien stehen, Size gesetzt, Zuständigkeit klar, Sprint zugewiesen. Ziehbar. |
 | **In Progress** | Branch steht, es wird gearbeitet. |
 | **In Review** | Pull Request offen, wartet auf Prüfung. |
-| **Ready for Deployment** | Gemergt, aber noch nicht ausgeliefert. **Von Hand zu setzen**, siehe Hinweis unten. |
+| **Ready for Deployment** | Fachlich abgenommen, wartet auf Merge und Auslieferung. **Setzt der Product Owner von Hand**, siehe Hinweis unten. |
 | **Done** | Ausgeliefert. Wird automatisch gesetzt, wenn der PR mit `Closes #<nr>` schließt. |
 | **Rejected** | Getriaged und verworfen (Duplikat, außerhalb des Scopes, überholt). Wird nicht bearbeitet. |
 
 **Zu `Rejected`:** Der Status, den alle weglassen wollen und alle brauchen. Ohne ihn gibt es nur zwei Wege, ein Ticket loszuwerden: es fälschlich auf `Done` setzen oder es für immer im Backlog liegen lassen. Beides vergiftet das Board.
 
-**Zu `Ready for Deployment`:** Der einzige Status, den keine Automatik bedient. Beim Merge springt ein Issue direkt auf `Done`, weil die eingebaute Regel am Schließen hängt, nicht am Ausliefern. Der Status lohnt sich nur, wenn bei euch Merge und Auslieferung wirklich auseinanderfallen (etwa bei festen Release-Terminen), und dann setzt ihn jemand von Hand. Liefert ihr fortlaufend aus, streicht ihn beim Setup und arbeitet mit sechs Status. Ein Status, den niemand pflegt, ist schlimmer als einer, den es nicht gibt.
+**Zu `Ready for Deployment`:** Der Abnahme-Status, und die Übergabe zurück an die Entwicklung. Der Product Owner setzt ihn von Hand, wenn er getestet hat und es fachlich passt. Er sagt damit: von meiner Seite fertig, liefert aus.
+
+Das ist bewusst getrennt, weil **der Product Owner den Pull Request nicht selbst merged.** Wann und wohin ausgeliefert wird, hängt an Dingen, die er nicht überblickt (offene Branches, Release-Fenster, Abhängigkeiten). Er entscheidet über das Fachliche, die Entwicklung über den Zeitpunkt.
+
+Der einzige Status, den keine Automatik bedient. Beim Merge springt das Issue anschließend von selbst auf `Done`, weil die eingebaute Regel am Schließen hängt. **Liefert ihr fortlaufend aus** und merged direkt nach der Abnahme, streicht ihn beim Setup und arbeitet mit sechs Status. Ein Status, den niemand pflegt, ist schlimmer als einer, den es nicht gibt.
 
 ## 4. Die Felder
 
@@ -141,8 +147,8 @@ Am Beispiel eines Fehlers, der in der Produktion auffällt:
 5. **Arbeit beginnt.** `/issue-implement` liest das Issue samt Kommentaren, legt einen Plan vor, und nach Freigabe entsteht ein Branch. Status auf **In Progress**.
 6. **Umsetzung** entlang des Plans, Akzeptanzkriterien als Checkliste.
 7. **Fertigmeldung.** `/issue-done` zieht Bilanz, öffnet den PR mit `Closes #<nr>` im Body und schreibt den Prüf-Kommentar. Status auf **In Review**.
-8. **Prüfung.** Der Anforderer testet. Hakt etwas, kommt es über `/issue-feedback` als Kommentar zurück, und das Ticket geht auf **In Progress**.
-9. **Merge.** Das Issue schließt sich automatisch, Status auf **Done**.
+8. **Prüfung.** Der Product Owner testet. **Passt es**, setzt er den Status auf **Ready for Deployment**: seine Abnahme, und die Übergabe zurück an die Entwicklung. **Hakt etwas**, kommt es über `/issue-feedback` als Kommentar zurück und das Ticket geht auf **In Progress**, weiter bei Schritt 5.
+9. **Auslieferung.** Die Entwicklung merged den Pull Request und liefert aus. Das Issue schließt sich durch `Closes #<nr>` automatisch, Status auf **Done**.
 
 ## 10. Zusammenspiel mit Claude Code
 
@@ -150,10 +156,10 @@ Vier Skills decken den Kreislauf ab:
 
 | Skill | Rolle | Macht |
 |---|---|---|
-| `/issue-create` | Anforderer | Stichpunkte werden ein sauberes Ticket auf dem Board |
+| `/issue-create` | Product Owner | Stichpunkte werden ein sauberes Ticket auf dem Board |
 | `/issue-implement` | Entwicklung | Ticket wird Plan, Plan wird Code |
 | `/issue-done` | Entwicklung | Bilanz, PR, ab in den Review |
-| `/issue-feedback` | Anforderer | Testbefunde werden Kommentar, Ticket zurück in die Arbeit |
+| `/issue-feedback` | Product Owner | Testbefunde werden Kommentar, Ticket zurück in die Arbeit |
 
 Direkt geht natürlich auch:
 
