@@ -7,7 +7,7 @@ Format pro Lauf:
 ```
 ## [YYYY-MM-DD] Iteration N
 - Quelle: <datei aus _neu/>, <X Zeilen gelesen>
-- Änderung: <was sich in financial-planning.md geändert hat>
+- Änderung: <was sich in kosten.md geändert hat>
 - Annahme neu/geändert: <falls zutreffend>
 - Lücken: <geplante Quellen, die noch leer sind>
 ```
