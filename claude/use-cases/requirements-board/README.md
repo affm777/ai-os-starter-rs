@@ -21,7 +21,7 @@ Du testest, es hakt  →   /requirement-feedback    →   Kommentar an Karte
 
 - Standard-Bootstrap (`bash bootstrap.sh`) ist durchgelaufen.
 - **Notion-Connector** verbunden (claude.ai → Einstellungen → Connectors → Notion). **Gmail-Connector** verbunden, falls du Anforderungen aus Mails ziehen willst.
-- **Plan-Check, jetzt und nicht am Workshop-Tag:** Die Notion-Datenbankabfrage ist plan-gebunden (Business-Plan plus Notion AI). Sag Claude: „Zeig mir die Karten aus einer beliebigen meiner Notion-Datenbanken." Kommen Daten, ist alles gut. Kommt ein Upgrade-Hinweis, brauchst du einen anderen Notion-Plan, sonst können die Skills nicht suchen.
+- **Verbindungs-Check, jetzt und nicht am Workshop-Tag:** Sag Claude: „Zeig mir die Karten aus einer beliebigen meiner Notion-Datenbanken." Kommen Daten, ist alles gut. Ein Plan-Upgrade brauchst du dafür nicht: Die Abfrage läuft auf allen Plänen, auf Free und Plus lediglich mit einem Stundenlimit.
 
 ## Schritt 1 — Projekt anlegen
 
@@ -31,7 +31,7 @@ Das Bundle lebt in einem Projekt, nicht global. Falls du noch keins hast:
 /new-project
 ```
 
-Damit hast du CLAUDE.md, STATE.md und einen `.claude/`-Ordner, in den das Bundle gleich einzieht.
+Damit hast du CLAUDE.md und STATE.md. Den `.claude/`-Ordner legt Claude im nächsten Schritt beim Kopieren mit an, den musst du nicht vorbereiten.
 
 ## Schritt 2 — Bundle ins Projekt holen
 

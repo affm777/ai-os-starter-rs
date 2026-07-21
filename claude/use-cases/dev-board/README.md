@@ -22,7 +22,7 @@ in In Progress               Plan-Modus, Freigabe, Umsetzung
 
 ## Voraussetzungen
 
-- Standard-Bootstrap (`bash bootstrap.sh`) ist durchgelaufen, **Notion-Connector** verbunden (Plan-Check siehe requirements-board-README: Datenbankabfragen brauchen Notion Business plus Notion AI).
+- Standard-Bootstrap (`bash bootstrap.sh`) ist durchgelaufen, **Notion-Connector** verbunden. Ein Plan-Upgrade brauchst du nicht: Die Datenbankabfrage läuft auf allen Plänen, auf Free und Plus lediglich mit einem Stundenlimit.
 - **Das Board existiert bereits**, aufgesetzt oder übernommen über das Bundle `requirements-board`.
 - Deine Codebase ist ein Projekt mit CLAUDE.md. Falls nicht, öffne Claude Code im Repo und sag: „Lies dieses Projekt und erzeuge eine CLAUDE.md mit Architektur, Konventionen und Build-Kommandos."
 
@@ -38,6 +38,13 @@ Platziere es in meinem aktuellen Projekt so:
 - skills/issue-implement/   → .claude/skills/issue-implement/
 - skills/issue-done/        → .claude/skills/issue-done/
 
+Hol zusätzlich die Board-Regel-Datei aus dem Nachbar-Bundle:
+- claude/use-cases/requirements-board/rules/notion-board.md
+  → .claude/rules/notion-board.md
+
+Die Regel-Datei aber nur holen, falls .claude/rules/notion-board.md bei mir
+noch nicht existiert. Eine bereits ausgefüllte niemals überschreiben.
+
 Bestätige mir kurz, welche Dateien angekommen sind.
 ```
 
@@ -45,7 +52,15 @@ Danach `/exit` und `claude` neu starten, damit die zwei Skills geladen werden.
 
 ## Schritt 2 — Board-Regel-Datei übernehmen
 
-Die Skills lesen `.claude/rules/notion-board.md`. Diese Datei ist beim Board-Besitzer bereits ausgefüllt (requirements-board, Schritt 3). Hol dir die ausgefüllte Fassung (IDs, Property-Namen, Status) und leg sie **identisch** unter `.claude/rules/notion-board.md` in deiner Codebase ab. Nicht neu erfinden: beide Seiten müssen auf dieselben IDs zeigen.
+Schritt 1 hat die Regel-Datei als leere Vorlage geholt. Die **IDs darin fehlen noch** — und ohne `DATASOURCE_ID` findet kein Skill eine Karte.
+
+**Wenn es schon einen Board-Besitzer gibt** (jemand hat `requirements-board` aufgesetzt): Lass dir dessen ausgefüllte `.claude/rules/notion-board.md` schicken und überschreib deine Fassung damit **identisch**. Nicht neu erfinden, beide Seiten müssen auf dieselben IDs zeigen. Achtung: Die Datei liegt bei ihm im Anforderungs-Projekt, bei dir gehört sie in deine Codebase — sie wird also zwischen zwei Verzeichnissen kopiert.
+
+**Wenn es noch keinen gibt:** Dann bist du gerade beide Rollen, Anforderer und Entwicklung. Dieses Bundle allein reicht dafür nicht, und zwar aus einem Grund, der leicht zu übersehen ist: `issue-implement` **setzt Karten um, es legt keine an**. Der Skill, der Karten anlegt, gehört zum Nachbar-Bundle. Ohne ihn stehst du vor einem leeren Board.
+
+Installier deshalb zuerst `requirements-board` **vollständig** (README, `board-setup.md`, beide Skills), setz damit das Board auf und leg eine erste Karte an. Dann komm hierher zurück. **Bleib dabei in diesem Verzeichnis und leg kein neues Projekt an**, auch wenn die README des Nachbar-Bundles mit `/new-project` beginnt. Sonst landet die ausgefüllte Regel-Datei in einem anderen Projekt als deine Codebase, und die Skills hier finden sie nicht. Rechne dafür mit einer knappen Stunde, das meiste davon Board und Views.
+
+Wenn dir jemand die Zeit abnehmen kann: das Board einmal aufsetzen zu lassen und dir nur die ausgefüllte `notion-board.md` geben zu lassen, ist der deutlich schnellere Weg.
 
 ## Schritt 3 — Erste Karte umsetzen
 

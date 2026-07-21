@@ -4,7 +4,7 @@ description: Setzt eine Karte vom Notion-Anforderungs-Board in Code um. Karte fi
 when_to_use: |
   Trigger-Phrasen: "setz Karte/Issue X um", "implementier <Karte>", "zieh die nächste
   Ready-Karte", "fang mit dem Bug X an", "arbeite die Karte ab", "nimm dir X vor".
-allowed-tools: Read, Write, Edit, Bash
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, ExitPlanMode, mcp__claude_ai_Notion__notion-search, mcp__claude_ai_Notion__notion-fetch, mcp__claude_ai_Notion__notion-query-data-sources, mcp__claude_ai_Notion__notion-update-page, mcp__claude_ai_Notion__notion-create-comment
 ---
 
 # Issue Implement
@@ -12,6 +12,8 @@ allowed-tools: Read, Write, Edit, Bash
 Von der Karte zum Code, mit einem freigegebenen Plan dazwischen. **Nichts wird implementiert, was nicht vorher als Plan auf dem Tisch lag.**
 
 Lies `.claude/rules/notion-board.md` einmal pro Lauf für IDs, Properties und Status-Namen. Bei einem übernommenen Board gilt der Board-Adoptions-Block, nicht die Standard-Namen. **Achtung:** Die Kartensuche braucht die **DATASOURCE_ID** (`collection://...`), nicht die Datenbank-ID aus der URL.
+
+**Stehen dort noch Platzhalter** (`<noch nicht gesetzt>`), ist das Board noch nicht aufgesetzt. Dann NICHT weiterlaufen und auch keinen Notion-Aufruf versuchen, sondern abbrechen und sagen: "Die Board-IDs in `.claude/rules/notion-board.md` fehlen noch. Arbeite einmal `board-setup.md` aus dem Bundle `requirements-board` ab, dann klappt das hier." Ein Lauf gegen leere IDs scheitert sonst mit einer Notion-Fehlermeldung, die nicht verrät, woran es lag.
 
 ## Workflow
 

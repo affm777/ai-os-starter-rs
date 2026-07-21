@@ -4,7 +4,7 @@ description: Meldet eine umgesetzte Karte vom Notion-Anforderungs-Board fertig. 
 when_to_use: |
   Trigger-Phrasen: "Issue/Karte X ist umgesetzt", "Bug gefixt, ab in den Review",
   "fertig mit <Karte>", "stell <Karte> auf Review", "meld die Karte fertig".
-allowed-tools: Read, Write, Bash
+allowed-tools: Read, Write, Bash, mcp__claude_ai_Notion__notion-search, mcp__claude_ai_Notion__notion-fetch, mcp__claude_ai_Notion__notion-query-data-sources, mcp__claude_ai_Notion__notion-update-page, mcp__claude_ai_Notion__notion-create-comment
 ---
 
 # Issue Done
@@ -12,6 +12,8 @@ allowed-tools: Read, Write, Bash
 Die Arbeit ist getan, jetzt wird sie abnehmbar: ein Kommentar, den der Anforderer prüfen kann, ohne den Code zu lesen, und die Karte wandert in den Review.
 
 Lies `.claude/rules/notion-board.md` einmal pro Lauf für IDs, Properties und Status-Namen. Bei einem übernommenen Board gilt der Board-Adoptions-Block. **Achtung:** Die Kartensuche braucht die **DATASOURCE_ID** (`collection://...`), nicht die Datenbank-ID aus der URL.
+
+**Stehen dort noch Platzhalter** (`<noch nicht gesetzt>`), ist das Board noch nicht aufgesetzt. Dann NICHT weiterlaufen und auch keinen Notion-Aufruf versuchen, sondern abbrechen und sagen: "Die Board-IDs in `.claude/rules/notion-board.md` fehlen noch. Arbeite einmal `board-setup.md` aus dem Bundle `requirements-board` ab, dann klappt das hier." Ein Lauf gegen leere IDs scheitert sonst mit einer Notion-Fehlermeldung, die nicht verrät, woran es lag.
 
 ## Workflow
 
@@ -28,6 +30,8 @@ Lies `.claude/rules/notion-board.md` einmal pro Lauf für IDs, Properties und St
 4. **Kommentar anhängen** mit `notion-create-comment` an die Karte.
 
 5. **Status auf den Review-Status** (`REVIEW_STATUS` laut Regel-Datei, Standard `In Review`) mit `notion-update-page`. **Nur bei vollständiger Umsetzung.** Ist etwas offen, bleibt der Status stehen und der Kommentar sagt, was fehlt.
+
+   **Umgesetzt und geprüft sind zwei verschiedene Dinge.** Maßstab für den Statuswechsel ist die *Umsetzung*: ist jedes Akzeptanzkriterium im Code abgebildet, geht die Karte in den Review. Fehlende automatisierte Tests oder eine Prüfung, die nur von Hand möglich war, halten die Karte **nicht** auf. Sie gehören in den Kommentar, unter „wie zu prüfen". Sonst bleiben Karten in Projekten ohne Testabdeckung für immer liegen. Offen im Sinne dieses Schritts heißt: ein Kriterium ist gar nicht oder nur teilweise gebaut.
 
 6. **Zurückmelden:** Link zur Karte, der Statuswechsel, und was als Nächstes passiert: der Anforderer prüft, sein Feedback kommt über `requirement-feedback` als Kommentar zurück und holt die Karte wieder auf den Arbeits-Status.
 

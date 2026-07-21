@@ -5,7 +5,7 @@ when_to_use: |
   Trigger-Phrasen: "leg eine Anforderung an", "mach daraus eine Karte/ein Ticket",
   "das gehört aufs Board", "aus dieser Mail/diesem Gespräch eine Anforderung",
   "erstell was für die Entwicklung draus", "neue Anforderung aus folgenden Punkten".
-allowed-tools: Read, Write, Bash
+allowed-tools: Read, Write, Bash, mcp__claude_ai_Notion__notion-search, mcp__claude_ai_Notion__notion-fetch, mcp__claude_ai_Notion__notion-query-data-sources, mcp__claude_ai_Notion__notion-create-pages, mcp__claude_ai_Gmail__search_threads, mcp__claude_ai_Gmail__get_thread
 ---
 
 # Requirement Create
@@ -14,7 +14,7 @@ Aus rohem Material wird eine Karte, die ein Entwickler ohne Rückfrage ziehen ka
 
 Lies `.claude/rules/notion-board.md` einmal pro Lauf für die IDs, Properties und Werkzeuge. **Achtung:** Karten anlegen und Karten suchen brauchen die **DATASOURCE_ID** (`collection://...`), nicht die Datenbank-ID aus der URL. Die Regel-Datei erklärt den Unterschied.
 
-Wenn dort noch `<noch nicht gesetzt>` steht, existiert das Board noch nicht: dann `board-setup.md` abarbeiten, nicht raten.
+**Stehen dort noch Platzhalter** (`<noch nicht gesetzt>`), ist das Board noch nicht aufgesetzt. Dann NICHT weiterlaufen und auch keinen Notion-Aufruf versuchen, sondern abbrechen und sagen: "Die Board-IDs in `.claude/rules/notion-board.md` fehlen noch. Arbeite einmal `board-setup.md` aus diesem Bundle ab, dann klappt das hier." **Das Board nicht selbst anlegen** — dieser Skill legt Karten an, keine Datenbanken, und hat die Werkzeuge dafür bewusst nicht.
 
 ## Workflow
 

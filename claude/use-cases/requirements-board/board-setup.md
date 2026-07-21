@@ -2,7 +2,7 @@
 
 **Wofür:** Das Notion-Board anlegen, das die Skills `requirement-create` und `requirement-feedback` bespielen. **Ohne dieses Board läuft kein Skill.** Das hier ist Schritt null.
 
-**Wie benutzen:** Diese Datei Claude geben und sagen: „Setz mir das Anforderungs-Board nach `board-setup.md` auf." Claude arbeitet sie ab und trägt am Ende die IDs in `rules/notion-board.md` ein.
+**Wie benutzen:** Diese Datei Claude geben und sagen: „Setz mir das Anforderungs-Board nach `board-setup.md` auf." Claude arbeitet sie ab und trägt am Ende die IDs in `.claude/rules/notion-board.md` ein.
 
 **Dauer:** wenige Minuten. Einmalig.
 
@@ -12,13 +12,13 @@
 
 **Habt ihr schon ein Board für Anforderungen?**
 
-Wenn ja: **hier aufhören.** Kein zweites Board bauen. Stattdessen die Property-Namen in `rules/notion-board.md` an das bestehende Board anpassen und die IDs von dort holen. Ein zweites Board neben einem gewachsenen ist der schnellste Weg, dass beide sterben.
+Wenn ja: **hier aufhören.** Kein zweites Board bauen. Stattdessen die Property-Namen in `.claude/rules/notion-board.md` an das bestehende Board anpassen und die IDs von dort holen. Ein zweites Board neben einem gewachsenen ist der schnellste Weg, dass beide sterben.
 
 Nur weiterlesen, wenn es wirklich noch keins gibt.
 
-## Schritt 1: Plan-Check, bevor irgendetwas gebaut wird
+## Schritt 1: Verbindungs-Check, bevor irgendetwas gebaut wird
 
-Die Datenbank-Abfrage über den Notion-Connector ist **plan-gebunden**: Business-Plan aufwärts plus Notion AI. Beide Skills brauchen sie.
+Beide Skills brauchen die Datenbank-Abfrage über den Notion-Connector. Sie läuft auf allen Plänen, auf Free und Plus mit einem Stundenlimit. Ein Upgrade ist nicht nötig, der Connector muss nur verbunden sein.
 
 Test:
 
@@ -39,6 +39,11 @@ Frag den Nutzer: „Welche Systeme oder Produkte betreut ihr? Die werden die Epi
 ## Schritt 3: Datenbank anlegen
 
 `notion-create-database` mit genau diesem Schema. Die Epic-Werte aus Schritt 2 einsetzen.
+
+**Vorher zwei Dinge klären, sonst sieht das Board niemand ausser dir:**
+
+- **Wo soll es liegen?** Ohne `parent` legt Notion die Datenbank als **private Seite auf Workspace-Ebene** an. Ein Anforderungs-Board, das die Entwicklung nicht sieht, ist wertlos. Also fragen, in welchen Teamspace oder unter welche Seite es gehört, und diese als `parent` mitgeben. Im Zweifel den Teamspace nehmen, in dem das Team ohnehin arbeitet.
+- **Wie soll es heissen?** Der `title` ist ein eigener Parameter und steht nicht im Schema unten. Fragen, statt einen Namen zu erfinden.
 
 ```sql
 CREATE TABLE (
@@ -64,7 +69,7 @@ CREATE TABLE (
 - die **Datenbank-ID** (steht in der zurückgegebenen URL)
 - die **Data-Source-ID** aus dem `<data-source url="collection://...">`-Tag
 
-Die zweite steht **nicht** in der URL und ist genau die, die die Skills brauchen. Siehe `rules/notion-board.md`.
+Die zweite steht **nicht** in der URL und ist genau die, die die Skills brauchen. Siehe `.claude/rules/notion-board.md`.
 
 ## Schritt 4: Die vier Views anlegen
 
@@ -114,6 +119,6 @@ Testkarten danach löschen, wenn das Board produktiv geht.
 
 ## Schritt 6: IDs eintragen
 
-Beide IDs in `rules/notion-board.md` in den Block oben eintragen. **Erst danach funktionieren die Skills.**
+Beide IDs in `.claude/rules/notion-board.md` in den Block oben eintragen. **Erst danach funktionieren die Skills.**
 
 Zum Abschluss dem Nutzer melden: Board-Link, die vier Views, und die zwei Dinge, die er wissen muss: der Sprint-Filter ist manuell, und `Rejected` ist da, um benutzt zu werden.

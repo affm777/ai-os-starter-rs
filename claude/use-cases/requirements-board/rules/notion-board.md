@@ -1,6 +1,6 @@
 # Notion-Board: Konvention und IDs
 
-> Diese Datei hält alles, was die Skills `requirement-create` und `requirement-feedback` über euer Board wissen müssen, an genau einer Stelle. Ändert sich das Board, ändert sich nur diese Datei, nicht die Skills.
+> Diese Datei hält alles, was die vier Board-Skills über euer Board wissen müssen, an genau einer Stelle: `requirement-create` und `requirement-feedback` auf der Anforderer-Seite, `issue-implement` und `issue-done` aus dem Bundle `dev-board` auf der Entwicklungs-Seite. Ändert sich das Board, ändert sich nur diese Datei, nicht die Skills.
 >
 > **Das Board hier ist auf ein bewährtes GitHub-Projektboard gespiegelt**, inklusive der Status-Namen. Wer beide Welten kennt, findet sich sofort zurecht.
 
@@ -116,11 +116,11 @@ Der Notion-Connector muss verbunden sein (`claude.ai` → Einstellungen → Conn
 | Property ändern (Status) | `notion-update-page` | Seiten-ID |
 | Kommentar anhängen | `notion-create-comment` | Seiten-ID |
 
-## Plan-Vorbehalt (vor dem ersten Lauf prüfen)
+## Verbindungs-Check (vor dem ersten Lauf prüfen)
 
-Die Datenbank-Abfrage über den Notion-Connector ist **plan-gebunden**: Business-Plan aufwärts **plus Notion AI**. Das steht so in der Tool-Doku, es ist keine Vermutung. Auf kleineren Plänen kommt statt Daten ein Upgrade-Hinweis.
+Die Datenbank-Abfrage über den Notion-Connector läuft auf **allen Plänen**, auch Free und Plus. Dort greift allerdings ein **Stundenlimit** auf die Zahl der Abfragen. Nur Abfragen über **mehrere** Data Sources hinweg verlangen Enterprise plus Notion AI, und beide Skills fragen immer nur **eine** Data Source ab. Ein Plan-Upgrade ist für diesen Use Case also nicht nötig. (Quelle: Tool-Beschreibung von `notion-query-data-sources`.)
 
-**Das betrifft beide Skills**, denn `notion-query-data-sources` steckt im Dedup-Check von `requirement-create` und in der Kartensuche von `requirement-feedback`. Ohne die Abfrage laufen beide ins Leere.
+**Das Stundenlimit betrifft beide Skills**, denn `notion-query-data-sources` steckt im Dedup-Check von `requirement-create` und in der Kartensuche von `requirement-feedback`. Wer auf Free oder Plus viele Karten hintereinander anlegt, kann es erreichen. Dann hilft warten, nicht upgraden.
 
 **Vor dem Workshop-Tag einmal testen**, nicht am Tag selbst. Test in einem Satz: „Zeig mir die Karten aus meinem Board <Name>." Kommen Daten, ist alles gut.
 
