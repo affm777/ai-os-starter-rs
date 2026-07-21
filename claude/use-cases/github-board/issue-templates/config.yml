@@ -1,0 +1,16 @@
+# ANPASSEN VOR DEM EINSATZ: beide Links unten auf euer Repo und eure Kontaktadresse setzen.
+# Falsche Links hier sind besonders ärgerlich, weil sie genau dann angeklickt werden,
+# wenn jemand ohnehin schon ein Problem hat.
+#
+# ACHTUNG Discussions: bei neuen Repos standardmässig AUS. Entweder unter
+# Settings -> Features aktivieren oder den ersten Eintrag entfernen. Zusammen mit
+# blank_issues_enabled: false ist er sonst eine Sackgasse fuer jeden, dem keine
+# der drei Vorlagen passt.
+blank_issues_enabled: false
+contact_links:
+  - name: Frage oder Diskussion
+    url: https://github.com/OWNER/REPO/discussions
+    about: Für allgemeine Fragen und Diskussionen bitte GitHub Discussions nutzen.
+  - name: Direkter Kontakt
+    url: mailto:TODO@example.com
+    about: Für alles, was nicht in ein öffentliches Issue gehört.

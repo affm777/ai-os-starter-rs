@@ -1,0 +1,83 @@
+# ANPASSEN VOR DEM EINSATZ: die Epic-Werte unten auf eure Themenfelder setzen.
+# Den Compliance-Block am Ende an eure Rahmenbedingungen anpassen oder entfernen,
+# wenn er bei euch nicht greift.
+name: Feature Request
+description: Neue Funktion oder Verbesserung vorschlagen
+labels: ["triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für den Vorschlag. Vor dem Absenden kurz prüfen:
+        - Löst das ein echtes Problem, oder ist es eine Lösung auf der Suche nach einem?
+        - Gibt es das schon als Issue? Ein Duplikat kostet alle Zeit.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem oder Anwendungsfall
+      description: Welches Problem löst das, für wen?
+      placeholder: "Als Nutzer möchte ich..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Vorgeschlagene Lösung
+      description: Wie soll das aus Sicht des Nutzers funktionieren?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Akzeptanzkriterien
+      description: Woran ist ablesbar, dass die Arbeit fertig ist? Ohne diese Liste ist es kein Ticket, sondern ein Wunsch.
+      placeholder: |
+        - [ ] Kriterium 1
+        - [ ] Kriterium 2
+        - [ ] Kriterium 3
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Betrachtete Alternativen
+      description: Was käme sonst infrage, und warum ist es das nicht geworden?
+
+  - type: dropdown
+    id: epic
+    attributes:
+      label: Ziel-Themenfeld (Epic)
+      options:
+        - Themenfeld A
+        - Themenfeld B
+        - Themenfeld C
+        - Infrastruktur
+        - Dokumentation
+        - Unbekannt / Sonstiges
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorität (deine Einschätzung)
+      description: Wird beim Triage bestätigt
+      options:
+        - "P0: Blocker"
+        - "P1: hoch"
+        - "P2: normal"
+        - "P3: nice-to-have"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: compliance
+    attributes:
+      label: Kurzcheck
+      options:
+        - label: Es werden keine personenbezogenen Daten zusätzlich erhoben oder weitergegeben
+          required: false
+        - label: Soweit ich es beurteilen kann, DSGVO-konform
+          required: false

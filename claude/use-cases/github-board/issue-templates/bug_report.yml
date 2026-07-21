@@ -1,0 +1,88 @@
+# ANPASSEN VOR DEM EINSATZ: die Epic-Werte unten auf eure Themenfelder setzen
+# (dieselben, die ihr in board-setup.md Schritt 2 festgelegt habt).
+name: Bug Report
+description: Etwas funktioniert nicht wie erwartet
+labels: ["triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Danke für die Meldung. Bitte das Formular ausfüllen, dann geht die Bearbeitung schneller.
+
+        **Wichtig:** Niemals personenbezogene Daten, API-Keys, Tokens oder Kundeninhalte in ein Issue schreiben. Issues sind für alle im Repo sichtbar.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Was ist passiert?
+      description: Klare Beschreibung des Problems
+      placeholder: "Beim Speichern des Formulars dreht sich der Ladebalken endlos..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Schritte zur Reproduktion
+      description: Wie kommt man zu dem Fehler? Je genauer, desto schneller der Fix.
+      placeholder: |
+        1. Gehe zu '...'
+        2. Klicke auf '...'
+        3. Beobachte den Fehler
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartetes Verhalten
+      description: Was hätte stattdessen passieren sollen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs oder Fehlermeldungen
+      description: Relevante Ausgaben einfügen. KEINE Keys, Tokens oder personenbezogenen Daten.
+      render: shell
+
+  - type: dropdown
+    id: epic
+    attributes:
+      label: Betroffenes Themenfeld (Epic)
+      description: In welchem Bereich sitzt der Fehler?
+      options:
+        - Themenfeld A
+        - Themenfeld B
+        - Themenfeld C
+        - Infrastruktur
+        - Dokumentation
+        - Unbekannt / Sonstiges
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Umgebung
+      description: Wo ist das aufgetreten?
+      placeholder: |
+        - Betriebssystem: macOS 15 / Windows 11 / Ubuntu 24.04
+        - Browser: Chrome 130
+        - Umgebung: lokal / Staging / Produktion
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorität (deine Einschätzung)
+      description: Wird beim Triage bestätigt
+      options:
+        - "P0: Blocker (Produktion kaputt, Datenverlust, Compliance)"
+        - "P1: hoch (betrifft Nutzer, Workaround existiert)"
+        - "P2: normal (störend, aber nicht blockierend)"
+        - "P3: nice-to-have (kosmetisch, geringe Wirkung)"
+    validations:
+      required: true

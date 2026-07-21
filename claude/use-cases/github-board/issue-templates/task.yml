@@ -1,0 +1,71 @@
+# ANPASSEN VOR DEM EINSATZ: die Epic-Werte unten auf eure Themenfelder setzen.
+name: Task
+description: Aufgabe, die weder Bug noch Feature ist (Refactoring, Recherche, Doku, Betrieb)
+labels: ["triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Für Arbeit, die weder Fehler noch neue Funktion ist: Refactorings, Recherchen, Dokumentation, Betriebsaufgaben, Nacharbeiten.
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Kontext
+      description: Warum braucht es diese Arbeit? Was hat sie ausgelöst?
+    validations:
+      required: true
+
+  - type: textarea
+    id: work
+    attributes:
+      label: Was zu tun ist
+      description: Konkrete Beschreibung der Arbeit
+    validations:
+      required: true
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: Wann ist diese Aufgabe fertig?
+      placeholder: |
+        - [ ] Kriterium 1
+        - [ ] Kriterium 2
+    validations:
+      required: true
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Referenzen
+      description: Links zu verwandten Issues, PRs, Dokumenten, externen Quellen
+      placeholder: |
+        - Verwandtes Issue #12
+        - Datei `src/services/foo.py`
+
+  - type: dropdown
+    id: epic
+    attributes:
+      label: Ziel-Themenfeld (Epic)
+      options:
+        - Themenfeld A
+        - Themenfeld B
+        - Themenfeld C
+        - Infrastruktur
+        - Dokumentation
+        - Unbekannt / Sonstiges
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priorität (deine Einschätzung)
+      options:
+        - "P0: Blocker"
+        - "P1: hoch"
+        - "P2: normal"
+        - "P3: nice-to-have"
+    validations:
+      required: true
