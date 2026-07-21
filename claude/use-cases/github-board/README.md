@@ -1,8 +1,8 @@
 # Ein Board, das die Arbeit trägt
 
-Anforderungen leben in Köpfen, Chats und Mails. Was daraus wird, weiß niemand genau: was ist offen, was läuft gerade, was ist eigentlich längst erledigt. Die üblichen Antworten (eine Excel-Liste, ein Kanal, ein Gedächtnis) halten genau so lange, bis mehr als eine Person beteiligt ist.
+Anforderungen leben in Köpfen, Chats und Mails. Was offen ist, was läuft und was längst erledigt ist, weiß niemand genau. Excel-Liste, Kanal oder Gedächtnis halten genau so lange, bis mehr als eine Person beteiligt ist.
 
-Dieses Bundle setzt ein **GitHub-Projektboard** auf und gibt euch vier Skills, die den vollen Kreislauf abdecken: vom formlosen Gedanken zum sauberen Ticket, vom Ticket zum Code, vom Code zurück in die Abnahme. Alles im selben Repo, in dem der Code ohnehin liegt.
+Dieses Bundle setzt ein **GitHub-Projektboard** auf und gibt euch vier Skills für den vollen Kreislauf: vom formlosen Gedanken zum Ticket, vom Ticket zum Code, vom Code zurück in die Abnahme. Alles im selben Repo, in dem der Code ohnehin liegt.
 
 ```
 Rohmaterial            Claude                    GitHub-Board
@@ -18,8 +18,6 @@ Du testest,        →   /issue-feedback      →    Kommentar am Issue
 etwas hakt                                       (zurück auf In Progress)
 ```
 
-**Warum GitHub und nicht Notion:** Wenn euer Code ohnehin auf GitHub liegt, ist das Board keine zweite Welt, die synchron gehalten werden muss. Der Pull Request schließt das Ticket, der Sprint läuft von selbst weiter, und der Entwickler wechselt für ein Ticket nicht das Werkzeug. Arbeitet ihr ohne eigene Codebase oder soll der Anforderer nichts von GitHub sehen, ist das Bundle `requirements-board` (Notion) der bessere Weg.
-
 ## Konventionen in dieser Anleitung
 
 - **„Sag Claude:"** + Block, du tippst das in den **Chat** von Claude Code.
@@ -30,13 +28,7 @@ etwas hakt                                       (zurück auf In Progress)
 - Standard-Bootstrap (`bash bootstrap.sh`) ist durchgelaufen.
 - **Ein GitHub-Repo**, in dem die Issues leben sollen. Das ist normalerweise das Repo eurer Codebase.
 - **`gh` ist installiert und angemeldet.** Prüfen mit `gh auth status`. Fehlt es: `brew install gh`, dann `gh auth login`.
-- **Der `project`-Scope.** Das ist die Stolperstelle, die alle erwischt: ein normaler `gh auth login` bringt ihn **nicht** mit, und ohne ihn scheitert jeder Board-Befehl mit einer Meldung, die nicht verrät, woran es lag.
-
-  **Jetzt prüfen, nicht am Workshop-Tag:**
-  ```bash
-  gh project list --owner @me
-  ```
-  Kommt ein Scope-Fehler statt einer (auch leeren) Liste:
+- **Der `project`-Scope.** Ein normaler `gh auth login` bringt ihn **nicht** mit, und ohne ihn scheitert jeder Board-Befehl mit einer Meldung, die nicht verrät, woran es lag. Prüfen mit `gh project list --owner @me`. Kommt ein Scope-Fehler statt einer (auch leeren) Liste:
   ```bash
   gh auth refresh -s project --hostname github.com
   ```
@@ -64,7 +56,7 @@ Eine bereits ausgefüllte .claude/rules/github-board.md niemals überschreiben.
 Bestätige mir kurz, welche Dateien angekommen sind.
 ```
 
-Danach `/exit` und `claude` neu starten, damit die vier Skills geladen werden. **Das wird gern vergessen**, und dann heißt es „der Skill geht nicht", obwohl er nur noch nicht geladen ist.
+Danach `/exit` und `claude` neu starten, damit die vier Skills geladen werden. **Wird gern vergessen**, und dann heißt es „der Skill geht nicht", obwohl er nur nicht geladen ist.
 
 ## Schritt 2 — Board aufsetzen
 
@@ -86,9 +78,9 @@ Schritt für Schritt ab und trag die IDs am Ende in
 .claude/rules/github-board.md ein.
 ```
 
-Claude fragt nach euren **Epics** (den groben Themenfeldern), legt Projekt und Felder an, sagt dir für die drei Browser-Schritte genau, was zu klicken ist, und trägt am Ende alle IDs ein.
+Claude fragt nach euren **Epics** (den groben Themenfeldern), legt Projekt und Felder an, sagt dir für die Browser-Schritte genau, was zu klicken ist, und trägt am Ende alle IDs ein.
 
-> **Plane den Browser mit ein.** `gh` kann Projekte und die meisten Felder anlegen, aber weder die Status-Optionen ändern noch das Sprint-Feld noch die Views. Das ist der Stand der GitHub-CLI, nicht eine Lücke der Anleitung. `board-setup.md` sagt bei jedem Schritt, welcher Weg gilt.
+> **Halte den Browser offen.** `gh` kann weder Status-Optionen ändern noch das Sprint-Feld noch die Views anlegen. Das ist der Stand der GitHub-CLI, keine Lücke der Anleitung. `board-setup.md` sagt bei jedem Schritt, welcher Weg gilt.
 
 ## Schritt 3 — Issue-Templates anpassen und pushen
 
@@ -100,7 +92,7 @@ und in config.yml die beiden Links auf unser Repo und unsere Kontaktadresse.
 Danach committen und pushen.
 ```
 
-**Templates greifen erst auf dem Default-Branch.** Auf einem Feature-Branch sieht sie niemand, und das ist ein verwirrender Fehler, weil alles richtig aussieht.
+**Templates greifen erst auf dem Default-Branch.** Auf einem Feature-Branch sieht sie niemand, obwohl alles richtig aussieht.
 
 ## Schritt 4 — Erstes Issue anlegen
 
@@ -111,7 +103,7 @@ Mach aus folgendem Material ein Issue fürs Board:
 <dein Text>
 ```
 
-`/issue-create` bestimmt den Typ, prüft auf ein passendes Parent-Issue, schreibt das Ticket, legt es an, hängt es aufs Board und setzt die Felder. Es landet im **Backlog**, nicht auf `Ready`: das entscheidet das Grooming.
+`/issue-create` bestimmt den Typ, prüft auf ein passendes Parent-Issue, legt das Ticket an, hängt es aufs Board und setzt die Felder. Es landet im **Backlog**, nicht auf `Ready`: das entscheidet das Grooming.
 
 Dann die Prüffrage: **Könnte jemand das Ticket ziehen, ohne dich zu fragen?** Wenn nein, liegt es fast immer an den Akzeptanzkriterien. Nachschärfen, nochmal laufen lassen.
 
@@ -141,11 +133,11 @@ Ich habe #<Nummer> getestet, folgendes Feedback: <deine Beobachtung>
 
 ## Die drei Dinge, auf die es ankommt
 
-**Akzeptanzkriterien.** Ohne sie ist es keine Anforderung, sondern ein Wunsch. Die Umsetzung muss daran ablesen können, wann sie fertig ist. Sind sie aus dem Material nicht ableitbar, gehört das Ticket ins Backlog, mit der offenen Frage im Text.
+**Akzeptanzkriterien.** Ohne sie ist es keine Anforderung, sondern ein Wunsch. Sind sie aus dem Material nicht ableitbar, gehört das Ticket ins Backlog, mit der offenen Frage im Text.
 
-**Der Plan vor dem Code.** Der Plan-Modus ist keine Formalität. Er zwingt die Analyse (welche Module, welche Muster, welche Seiteneffekte) vor die erste Änderung, und du gibst frei, bevor etwas passiert.
+**Der Plan vor dem Code.** Er zwingt die Analyse vor die erste Änderung, und du gibst frei, bevor etwas passiert. Ein abgelehnter Plan kostet zwei Minuten, ein falsch gebautes Feature einen Nachmittag.
 
-**`Rejected` benutzen.** Der Status, den alle weglassen wollen. Ohne ihn gibt es nur zwei Wege, ein totes Ticket loszuwerden: fälschlich auf `Done` setzen oder für immer liegen lassen. Beides vergiftet das Board.
+**`Rejected` benutzen.** Sonst gibt es nur zwei Wege, ein totes Ticket loszuwerden: fälschlich auf `Done` setzen oder für immer liegen lassen. Beides vergiftet das Board.
 
 ## Was im Bundle liegt
 
@@ -167,4 +159,4 @@ github-board/
     └── issue-feedback/SKILL.md        ← Befunde werden Kommentar plus Status zurück
 ```
 
-**Die Notion-Variante desselben Denkmodells** liefern die Bundles `requirements-board` und `dev-board`. Gleiche Status, gleiche Felder, gleicher Kreislauf, nur eben in Notion und über zwei Bundles verteilt, weil dort Anforderer und Entwicklung in getrennten Verzeichnissen sitzen. Hier reicht eins, weil bei GitHub beide Rollen auf dasselbe Repo schauen.
+Denselben Kreislauf in Notion liefern die Bundles `requirements-board` und `dev-board`.
