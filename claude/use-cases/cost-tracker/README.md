@@ -24,7 +24,7 @@ Belege, Fotos              liest, ordnet zu,       auswertung.xlsx  (Ansicht: Ex
 
 ## Voraussetzungen
 
-- Standard-Bootstrap (`bash bootstrap.sh`) ist durchgelaufen, der Klon des Workshop-Repos liegt also noch auf deinem Rechner.
+- Standard-Bootstrap (`bash bootstrap.sh`) ist durchgelaufen.
 - Python mit `openpyxl` (für den Excel-Render): `pip3 install openpyxl`, falls nicht vorhanden. Claude sagt dir, wenn es fehlt.
   **Wenn das mit `externally-managed-environment` abbricht** (aktuelles macOS mit Homebrew-Python, häufig): Das ist kein Fehler bei dir, Python schützt nur seine Systeminstallation. Sag Claude einfach „installier openpyxl in einer venv" — er legt eine ab und nutzt sie. Alternativ `pip3 install --break-system-packages openpyxl`, das ist hier unbedenklich, weil `openpyxl` ein reines Zusatzpaket ist.
 - Ein Kosten-Export zum Starten: der CSV-Umsatzexport deines Bankkontos ist der beste Einstieg (jede Bank bietet ihn im Online-Banking an). Es geht aber auch mit einem Kontoauszug-PDF, losen Belegen oder einer Excel-Liste. Connectoren braucht diese Version keine.
@@ -39,21 +39,20 @@ Damit hast du CLAUDE.md, STATE.md und einen `.claude/`-Ordner.
 
 ## Schritt 2 — Bundle ins Projekt holen
 
-Das Bundle kommt aus dem **lokalen Klon** des Workshop-Repos (den hast du beim Bootstrap angelegt, typisch `~/ai-os-starter-rs`). Sag Claude:
+Sag Claude (er kennt sein Working-Verzeichnis und legt die Dateien passend ab):
 
 ```
-Hole das Use-Case-Bundle "cost-tracker" aus meinem lokalen Klon des
-Workshop-Repos (Ordner ai-os-starter-rs, dort unter
-claude/use-cases/cost-tracker/).
+Lade das Use-Case-Bundle "cost-tracker" aus dem Workshop-Repo:
+https://github.com/affm777/ai-os-starter-rs/tree/main/claude/use-cases/cost-tracker
 
-Kopiere es in mein aktuelles Projekt so:
+Platziere es in meinem aktuellen Projekt so:
 - vorlage/              → ./kosten/   (mit allen Unterordnern)
 - skills/cost-tracker/  → .claude/skills/cost-tracker/
 
 Bestätige mir, welche Dateien und Ordner angekommen sind.
 ```
 
-Falls Claude den Klon nicht findet, nenn ihm den Pfad (dorthin, wo du `git clone` ausgeführt hast). Danach `/exit` und `claude` neu starten, damit der Skill geladen wird.
+Danach `/exit` und `claude` neu starten, damit der Skill geladen wird.
 
 ## Schritt 3 — Erste Iteration bauen
 
