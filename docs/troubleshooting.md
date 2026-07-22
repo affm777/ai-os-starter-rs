@@ -4,48 +4,7 @@ Die zwei häufigsten Stolpersteine, jeweils mit Diagnose und Fix.
 
 ---
 
-## 1) `/remote-control` startet nicht
-
-**Symptom:** `/remote-control` lässt sich nicht ausführen, obwohl Claude Code aktuell ist und du eingeloggt bist. Das Slash-Command-Menü nennt keinen Grund.
-
-**Ursache:** Der Eintrag `"DISABLE_TELEMETRY": "1"` im `env`-Block von `~/.claude/settings.json` schaltet nicht nur die Telemetrie ab, sondern auch die Feature-Flag-Auswertung. Remote Control prüft seine Verfügbarkeit über genau diese Feature-Flags und verweigert deshalb den Start.
-
-Der Starter liefert dieses Flag **nicht mehr** aus. Relevant ist der Abschnitt also nur, wenn du es selbst gesetzt hast oder aus einem älteren Setup mitbringst.
-
-**Diagnose (optional):** Der direkte CLI-Aufruf nennt die Ursache im Klartext, das Slash-Command nicht:
-```bash
-claude remote-control --help
-```
-
-**Quick-Fix:** Diesen Block komplett kopieren und im Terminal ausführen. Er entfernt nur `DISABLE_TELEMETRY`, legt vorher ein Backup an und lässt alles andere unangetastet:
-```bash
-python3 - <<'EOF'
-import json, pathlib, shutil
-p = pathlib.Path.home() / ".claude" / "settings.json"
-d = json.loads(p.read_text())
-if d.get("env", {}).pop("DISABLE_TELEMETRY", None) is None:
-    print("DISABLE_TELEMETRY war nicht gesetzt. Nichts geändert.")
-else:
-    shutil.copy(p, str(p) + ".bak.remote-control")
-    p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
-    print("DISABLE_TELEMETRY entfernt. Backup: ~/.claude/settings.json.bak.remote-control")
-EOF
-```
-
-Alternativ ohne Terminal: gib Claude einfach die Anweisung „Bitte entferne den Eintrag `DISABLE_TELEMETRY` aus meiner `~/.claude/settings.json` und starte neu."
-
-Danach Claude Code **neu starten**, die Änderung greift erst in einer neuen Session. Dann `/remote-control` erneut versuchen.
-
-**Rückgängig machen:**
-```bash
-mv ~/.claude/settings.json.bak.remote-control ~/.claude/settings.json
-```
-
-**Was das für deine Privatsphäre bedeutet:** Telemetrie aus und Remote Control gleichzeitig geht technisch nicht, du musst dich entscheiden. Die übrigen drei Einträge (`DISABLE_ERROR_REPORTING`, `DISABLE_FEEDBACK_COMMAND`, `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY`) bleiben aktiv. Die schalten nur Fehlerberichte und Umfragen ab, keine Features. Wenn du Remote Control nicht brauchst, lass das Flag einfach stehen.
-
----
-
-## 2) Routine in der Claude Desktop App scheitert am Zugriff auf den Second Brain
+## 1) Routine in der Claude Desktop App scheitert am Zugriff auf den Second Brain
 
 **Symptom:** Du hast in der **Claude Desktop App** eine Routine (Scheduled Task) angelegt, z.B. für `/brain:sync-meetings`. Das Anlegen klappt, aber beim Ausführen kommt ein Fehler, dass auf den Second-Brain-Ordner (`~/Documents/Second-Brain/`) nicht zugegriffen werden kann. **Im Terminal** (Claude Code über iTerm, das Terminal oder das Cursor-Terminal) läuft dieselbe Routine problemlos.
 
@@ -88,6 +47,47 @@ Als manuelle Variante kannst du dem Second Brain in `~/.claude/settings.json` un
 }
 ```
 Danach die Desktop App neu starten.
+
+---
+
+## 2) `/remote-control` startet nicht
+
+**Symptom:** `/remote-control` lässt sich nicht ausführen, obwohl Claude Code aktuell ist und du eingeloggt bist. Das Slash-Command-Menü nennt keinen Grund.
+
+**Ursache:** Der Eintrag `"DISABLE_TELEMETRY": "1"` im `env`-Block von `~/.claude/settings.json` schaltet nicht nur die Telemetrie ab, sondern auch die Feature-Flag-Auswertung. Remote Control prüft seine Verfügbarkeit über genau diese Feature-Flags und verweigert deshalb den Start.
+
+Der Starter liefert dieses Flag **nicht mehr** aus. Relevant ist der Abschnitt also nur, wenn du es selbst gesetzt hast oder aus einem älteren Setup mitbringst.
+
+**Diagnose (optional):** Der direkte CLI-Aufruf nennt die Ursache im Klartext, das Slash-Command nicht:
+```bash
+claude remote-control --help
+```
+
+**Quick-Fix:** Diesen Block komplett kopieren und im Terminal ausführen. Er entfernt nur `DISABLE_TELEMETRY`, legt vorher ein Backup an und lässt alles andere unangetastet:
+```bash
+python3 - <<'EOF'
+import json, pathlib, shutil
+p = pathlib.Path.home() / ".claude" / "settings.json"
+d = json.loads(p.read_text())
+if d.get("env", {}).pop("DISABLE_TELEMETRY", None) is None:
+    print("DISABLE_TELEMETRY war nicht gesetzt. Nichts geändert.")
+else:
+    shutil.copy(p, str(p) + ".bak.remote-control")
+    p.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+    print("DISABLE_TELEMETRY entfernt. Backup: ~/.claude/settings.json.bak.remote-control")
+EOF
+```
+
+Alternativ ohne Terminal: gib Claude einfach die Anweisung „Bitte entferne den Eintrag `DISABLE_TELEMETRY` aus meiner `~/.claude/settings.json` und starte neu."
+
+Danach Claude Code **neu starten**, die Änderung greift erst in einer neuen Session. Dann `/remote-control` erneut versuchen.
+
+**Rückgängig machen:**
+```bash
+mv ~/.claude/settings.json.bak.remote-control ~/.claude/settings.json
+```
+
+**Was das für deine Privatsphäre bedeutet:** Telemetrie aus und Remote Control gleichzeitig geht technisch nicht, du musst dich entscheiden. Die übrigen drei Einträge (`DISABLE_ERROR_REPORTING`, `DISABLE_FEEDBACK_COMMAND`, `CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY`) bleiben aktiv. Die schalten nur Fehlerberichte und Umfragen ab, keine Features. Wenn du Remote Control nicht brauchst, lass das Flag einfach stehen.
 
 ---
 
