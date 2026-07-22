@@ -109,6 +109,52 @@ mv ~/.claude/settings.json.bak.remote-control ~/.claude/settings.json
 
 ---
 
+### Routine in der Claude Desktop App scheitert am Zugriff auf den Second Brain
+
+**Symptom:** Du hast in der **Claude Desktop App** eine Routine (Scheduled Task) angelegt, z.B. für `/brain:sync-meetings`. Das Anlegen klappt, aber beim Ausführen kommt ein Fehler, dass auf den Second-Brain-Ordner (`~/Documents/Second-Brain/`) nicht zugegriffen werden kann. **Im Terminal** (Claude Code über iTerm, das Terminal oder das Cursor-Terminal) läuft dieselbe Routine problemlos.
+
+**Ursache (in >90 % der Fälle):** macOS schirmt Apps über sein Datenschutz-System (TCC) vom `~/Documents`-Ordner ab. Dein Terminal hat diesen Zugriff meist längst, die Claude Desktop App als eigenständige App aber noch nicht. Deshalb die Asymmetrie: Terminal ja, Desktop App nein.
+
+**Erst prüfen, wo es klemmt:** Öffne das Terminal und führe aus:
+```bash
+ls ~/Documents/Second-Brain/01_Inbox/
+```
+- Listet Dateien auf → macOS selbst ist nicht das Problem, es fehlt der Desktop-App der Zugriff. Weiter mit **Fix 1**.
+- `Permission denied` → auch dein Terminal hat keinen Zugriff. Dann greift **Fix 1** trotzdem, nur für das Terminal-Programm statt für die Claude-App.
+
+#### Fix 1: Der Claude Desktop App Festplattenzugriff geben (Regelfall)
+
+1. **Systemeinstellungen** öffnen (Apfel-Menü oben links).
+2. Links **Datenschutz & Sicherheit** wählen.
+3. Zum Punkt **Vollständiger Festplattenzugriff** (Full Disk Access) scrollen und öffnen.
+4. Das **Plus (+)** klicken (ggf. vorher unten links per Passwort/Touch ID entsperren).
+5. Unter `/Programme` **Claude** auswählen und hinzufügen. Der Schalter daneben muss **an** sein.
+6. Die Claude Desktop App **komplett beenden und neu starten** (Cmd+Q, nicht nur Fenster schließen).
+7. Routine erneut mit **„Run now"** testen.
+
+Wer keinen vollen Festplattenzugriff geben will: Statt Schritt 3 den Punkt **Dateien und Ordner** wählen und der Claude App dort gezielt den Ordner **Dokumente** freigeben. Full Disk Access ist aber der zuverlässigere Weg.
+
+#### Fix 2: Zugriffsrecht in der Routine erlauben (falls Fix 1 nicht reicht)
+
+Wenn der Terminal-Test oben Dateien anzeigt, aber die Routine nach Fix 1 immer noch scheitert, fehlt der Routine die Erlaubnis, außerhalb des Projektordners zu schreiben:
+
+1. In der Desktop App **Routines** öffnen, die Task auswählen, **Edit**.
+2. **Permission Mode** von „Ask" auf **„Accept Edits"** stellen, speichern.
+3. Alternativ die Task einmal mit **„Run now"** starten und bei den Nachfragen jeweils „Yes, don't ask again" wählen.
+
+Als manuelle Variante kannst du dem Second Brain in `~/.claude/settings.json` unter `permissions.allow` explizit Zugriff geben:
+```json
+"permissions": {
+  "allow": [
+    "Read(~/Documents/Second-Brain/**)",
+    "Edit(~/Documents/Second-Brain/**)"
+  ]
+}
+```
+Danach die Desktop App neu starten.
+
+---
+
 ## Recovery-Szenarien
 
 ### "Wo finde ich meine Backup-Files?"
