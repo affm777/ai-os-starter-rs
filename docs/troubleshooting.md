@@ -10,17 +10,16 @@ Die zwei häufigsten Stolpersteine, jeweils mit Fix.
 
 **Ursache (in >90 % der Fälle):** macOS schirmt Apps über sein Datenschutz-System (TCC) vom `~/Documents`-Ordner ab. Dein Terminal hat diesen Zugriff meist längst, die Claude Desktop App als eigenständige App aber noch nicht. Deshalb die Asymmetrie: Terminal ja, Desktop App nein.
 
-### Fix 1: Der Claude Desktop App Festplattenzugriff geben (Regelfall)
+### Fix 1: Der Claude Desktop App Zugriff auf den Dokumente-Ordner geben (Regelfall)
 
 1. **Systemeinstellungen** öffnen (Apfel-Menü oben links).
-2. Links **Datenschutz & Sicherheit** wählen.
-3. Zum Punkt **Vollständiger Festplattenzugriff** (Full Disk Access) scrollen und öffnen.
-4. Das **Plus (+)** klicken (ggf. vorher unten links per Passwort/Touch ID entsperren).
-5. Unter `/Programme` **Claude** auswählen und hinzufügen. Der Schalter daneben muss **an** sein.
-6. Die Claude Desktop App **komplett beenden und neu starten** (Cmd+Q, nicht nur Fenster schließen).
-7. Routine erneut mit **„Run now"** testen.
+2. Links **Datenschutz & Sicherheit** wählen, dann **Dateien & Ordner** öffnen.
+3. In der Liste die App **Claude** finden (mit dem Anthropic-Stern-Icon, das ist die Desktop App).
+4. Den Schalter für **Ordner „Dokumente"** einschalten (dein Second Brain liegt unter `~/Documents`).
+5. Die Claude Desktop App **komplett beenden und neu starten** (Cmd+Q, nicht nur Fenster schließen).
+6. Routine erneut mit **„Run now"** testen.
 
-Wer keinen vollen Festplattenzugriff geben will: Statt Schritt 3 den Punkt **Dateien und Ordner** wählen und der Claude App dort gezielt den Ordner **Dokumente** freigeben. Full Disk Access ist aber der zuverlässigere Weg.
+Hinweis: In „Dateien & Ordner" gibt es **kein Plus-Symbol** zum Hinzufügen. Apps erscheinen hier automatisch, sobald sie einmal Zugriff angefragt haben. Falls **Claude** noch nicht in der Liste steht, führe die Routine einmal aus, macOS fragt dann nach dem Zugriff, danach taucht der Eintrag mit dem Schalter auf.
 
 ### Fix 2: Zugriff in den Settings hinterlegen (falls Fix 1 nicht reicht)
 
